@@ -60,7 +60,6 @@ AI は Web Worker で動くので、考えている間も演出は止まりま�
 
 - 実況と CPU キャラ5人（ザコ・ふつう・ガチ・鬼・神）の声は [Irodori-TTS](https://github.com/Aratako/Irodori-TTS)（`Aratako/Irodori-TTS-v4.1-Small`、MIT ライセンス）で生成
 - 設定画面の「声」で **女の子 / 男 / なし** を切り替え（初期値は女の子のアニメ声）。選んだ方の音声ファイルだけを読み込む
-- 男の声版は、鬼の一部と神のセリフが未収録（そのセリフは吹き出しだけ）
 - 声はすべて説明文から作った架空の声で、実在の人物の音声は使っていません。生成音声には Irodori-TTS が付ける SilentCipher の電子透かしが入っています
 - `voice-girl.js` / `voice-male.js` を `index.html` と同じ場所に置くと鳴る。無ければ声なしで動く
 - 音ボタン: ON（BGM＋効果音＋声）/ SEのみ（効果音＋声）/ OFF
