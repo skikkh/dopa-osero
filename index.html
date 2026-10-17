@@ -4,6 +4,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ドパオセロ</title>
 <meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="返すたびに脳汁ドバドバ。隕石・稲妻・ハンコ・弾幕・スロットが炸裂する、演出盛りすぎオセロ。CPUはザコから神まで5段階。ブラウザで無料。">
+<meta name="theme-color" content="#0b0320">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ドパオセロ">
+<meta property="og:title" content="ドパオセロ">
+<meta property="og:description" content="返すたびに脳汁ドバドバ。演出盛りすぎオセロ。CPUはザコから神まで5段階、ブラウザで無料。">
+<meta property="og:url" content="https://skikkh.github.io/dopa-osero/">
+<meta property="og:image" content="https://skikkh.github.io/dopa-osero/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@skikkh">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2316a052'/%3E%3Ccircle cx='32' cy='32' r='22' fill='%23f2f2f2'/%3E%3Cpath d='M32 10a22 22 0 0 0 0 44z' fill='%230d0d0d'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=M+PLUS+Rounded+1c:wght@500;800&display=swap">
@@ -323,6 +336,9 @@ body.lost #stage{filter:grayscale(.75) brightness(.75)}
 .rush .gfill{background:repeating-linear-gradient(90deg,var(--gold) 0 14px,var(--paper) 14px 28px);background-size:62px 100%;animation:slide .4s linear infinite}
 .rush .glbl #gName{color:var(--gold);text-shadow:0 0 12px var(--gold)}
 .rpts b.bump{animation:bump .3s cubic-bezier(.2,2,.4,1)}
+.share{display:block;text-align:center;text-decoration:none;padding:12px;border-radius:12px;background:#000;color:var(--paper);font-family:var(--f-display);font-size:15px;letter-spacing:.04em;box-shadow:0 0 0 2px var(--paper),0 0 18px rgba(255,255,255,.25)}
+.share:hover{box-shadow:0 0 0 2px var(--gold),0 0 22px var(--gold)}
+.share:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 
 .score b{font-weight:400;font-size:20px;line-height:1;font-variant-numeric:tabular-nums;background:linear-gradient(180deg,#fff,var(--gold) 60%,#ff8a00);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 6px rgba(255,210,31,.5))}
 .score.up b{filter:drop-shadow(0 0 12px rgba(255,210,31,1))}
@@ -537,6 +553,7 @@ legend{padding:0;margin-bottom:8px;font-family:var(--f-display);font-size:13px;l
       <button class="go" id="rAgain" type="button">もう一回!!</button>
       <button class="btn alt" id="rSetup" type="button">強さを変える</button>
     </div>
+    <a class="share" id="rShare" href="https://x.com/intent/post" target="_blank" rel="noopener">結果を X でポスト</a>
   </div>
 </div>
 
@@ -1796,6 +1813,9 @@ function showResult(r,you,cpu){
   const dl=$('#rList');dl.textContent='';
   for(const [k,v] of rows){const dt=document.createElement('dt');dt.textContent=k;const dd=document.createElement('dd');dd.textContent=v;dl.append(dt,dd);}
   $('#rNew').hidden=true;$('#rPts').textContent='0';
+  const pts=S.score.toLocaleString('en-US'),vs=`「${lv.name}」`;
+  const post=r==='win'?`ドパオセロで${vs}に ${you}-${cpu} で勝利！ SCORE ${pts}（${RANKS[S.rank][1]}）`:r==='lose'?`ドパオセロで${vs}に ${you}-${cpu} で敗北… SCORE ${pts}`:`ドパオセロで${vs}と ${you}-${cpu} で引き分け SCORE ${pts}`;
+  $('#rShare').href='https://x.com/intent/post?text='+encodeURIComponent(post)+'&url='+encodeURIComponent('https://skikkh.github.io/dopa-osero/')+'&hashtags='+encodeURIComponent('ドパオセロ');
   $('#result').hidden=false;$('#rAgain').focus();
   // arcade-style tally: the score counts up, then NEW RECORD drops in
   const rp=$('#rPts'),target=S.score,t0=performance.now(),D=Math.min(1800,600+target/2000);let lastTick=0;
